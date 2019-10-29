@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- <div class="data">
-      <h1>今日热闻</h1>
-    </div>-->
     <div
       class="list"
       v-infinite-scroll="loadMore"
@@ -39,7 +36,8 @@ export default {
       todayDate: "",
       list: [],
       isLoading: false,
-      loading: false
+      loading: false,
+      height:this.$store.state.height
     };
   },
   methods: {
@@ -73,7 +71,7 @@ export default {
     },
     showDay(index) {
       if (index === 0) {
-        return '今日新闻';
+        return "今日新闻";
       } else {
         return this.getToday(index);
       }
@@ -82,10 +80,10 @@ export default {
       let year = this.data[index].slice(0, 4);
       let month = this.data[index].slice(4, 6);
       let day = this.data[index].slice(6);
-      let today = new Date(year + '/' + month + '/' + day);
-      let week = ['日', '一', '二', '三', '四', '五', '六'];
-      return month + '月' + day + '日' + ' 星期' + week[today.getDay()];
-    },
+      let today = new Date(year + "/" + month + "/" + day);
+      let week = ["日", "一", "二", "三", "四", "五", "六"];
+      return month + "月" + day + "日" + " 星期" + week[today.getDay()];
+    }
   },
   created() {
     this.axios({
@@ -96,8 +94,8 @@ export default {
       //     this.data.push(item);
       //   });
       this.todayDate = res.data["date"];
-    //   this.list = res.data.data;
-     this.data.push(res.data['date']);
+      //   this.list = res.data.data;
+      this.data.push(res.data["date"]);
       this.articleList.push(res.data);
       //   res.data["stories"].forEach(item => {
       //     this.articleList.push(item);
@@ -106,6 +104,21 @@ export default {
   },
   mounted() {
     console.log(this.articleList);
+    window.onscroll = () => {
+      var dates = document.querySelectorAll(".date h1");
+      var arr=[]
+      for(var i=0;i<dates.length;i++){
+        arr.push(dates[i].getBoundingClientRect().top)
+      }
+      var n=arr.findIndex((item,index)=>{
+        return item<this.height&&arr[index+1]>0
+      })
+      if(n==-1){
+        this.$store.commit('setTitle','首页')
+      }else{
+        this.$store.commit('setTitle',dates[n].innerHTML)
+      }
+    };
   }
 };
 </script>
@@ -114,8 +127,8 @@ export default {
   .date {
     height: 110px;
     margin-bottom: 0;
-    //    line-height: 70px;
     background: none;
+    margin-top: -20px;
     h1 {
       height: 70px;
       line-height: 70px;
@@ -127,7 +140,7 @@ export default {
   padding: 0 10px;
 
   ul {
-    padding: 0;
+    padding: 0 ;
     li {
       //   width: 100vw;
       height: 170px;
@@ -155,6 +168,7 @@ export default {
     }
   }
 }
+
 .loading-box {
   padding: 0.1rem 0;
   margin-left: 270px;

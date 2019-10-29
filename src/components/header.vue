@@ -1,8 +1,9 @@
 <template>
-  <div class="header">
+  <div class="header" ref="header">
+    
     <div class="model">
       <span class="iconfont icon-daohang" @click="showPopup"></span>
-      <h1>首页</h1>
+      <h1>{{this.$store.state.title}}</h1>
     </div>
     <van-popup
       v-model="show"
@@ -11,7 +12,7 @@
       position="left"
       :style="{ height: '100%',width:'85%' }"
     >
-      <v-slide @change='changeShow'></v-slide>
+      <v-slide @change="changeShow"></v-slide>
     </van-popup>
     {{this.$store.state.show}}
   </div>
@@ -32,9 +33,20 @@ export default {
     showPopup() {
       this.show = true;
     },
-    changeShow(){
-      this.show=false
+    changeShow() {
+      this.show = false;
+    },
+    get() {
+      var headerH = this.$refs.header.offsetHeight;
+      console.log(headerH);
+      this.$store.commit('setHeight',headerH)
+      var title=document.querySelector('.model h1').innerHTML
+      this.$store.commit('setTitle',title)
+      
     }
+  },
+  mounted() {
+    this.get()
   }
 };
 </script>

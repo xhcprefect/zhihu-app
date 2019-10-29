@@ -48,7 +48,7 @@ export default {
 <style scoped lang="scss">
 .header {
   overflow: hidden;
-  width: 100vw;
+  width: 100%;
   height: 300px;
   background-color: #00a2ed;
   .tx {
@@ -86,7 +86,7 @@ export default {
     }
   }
   .shou {
-    width: 100vw;
+    width: 100%;
     height: 80px;
     background-color: #f0f0f0;
     line-height: 80px;

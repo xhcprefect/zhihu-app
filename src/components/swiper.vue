@@ -34,7 +34,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .van-swipe {
-  margin-top: 80px;
+  margin: 80px 0 20px 0;
   width: 100vw;
   height: 350px;
   img {

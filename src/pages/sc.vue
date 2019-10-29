@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       show: this.$store.state.show,
-      articleList: JSON.parse(localStorage.getItem('list')),
+      articleList: JSON.parse(localStorage.getItem('arr')),
       id: this.$store.state.scId
     };
   },

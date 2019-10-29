@@ -7,6 +7,8 @@ var state = {
   color:'',
   scId:'',
   articleList:[],
+  height:'',
+  title:'首页'
 }
 
 
@@ -15,7 +17,9 @@ var getters = {
   color:state=>state.color,
   show:state=>state.show,
   scId:state=>state.scId,
-  articleList:state=>state.articleList
+  articleList:state=>state.articleList,
+  height:state=>state.height,
+  title:state=>state.title
 }
 var mutations = {
   setArticleId(state, id) {
@@ -32,6 +36,12 @@ var mutations = {
   },
   setArticleList(state,name){
     state.articleList=name
+  },
+  setHeight(state,name){
+    state.height=name
+  },
+  setTitle(state,name){
+    state.title=name
   }
 }
 var store = new vuex.Store({
