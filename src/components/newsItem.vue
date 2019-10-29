@@ -90,16 +90,12 @@ export default {
       url: api.nowItem
     }).then(res => {
       console.log(res);
-      //   res.data["date"].forEach(item => {
-      //     this.data.push(item);
-      //   });
+     
       this.todayDate = res.data["date"];
-      //   this.list = res.data.data;
+      
       this.data.push(res.data["date"]);
       this.articleList.push(res.data);
-      //   res.data["stories"].forEach(item => {
-      //     this.articleList.push(item);
-      //   });
+     
     });
   },
   mounted() {
@@ -110,8 +106,10 @@ export default {
       for(var i=0;i<dates.length;i++){
         arr.push(dates[i].getBoundingClientRect().top)
       }
+      console.log(arr);
+      
       var n=arr.findIndex((item,index)=>{
-        return item<this.height&&arr[index+1]>0
+        return item<=52&&arr[index+1]>0
       })
       if(n==-1){
         this.$store.commit('setTitle','首页')
